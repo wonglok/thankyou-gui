@@ -2,6 +2,8 @@ import dynamic from 'next/dynamic'
 // Step 5 - delete Instructions components
 import Instructions from '@/components/dom/Instructions'
 import { Suspense } from 'react'
+import { GlassWindow } from '@/components/canvas/GlassWindow/GlassWindow'
+import { Env } from '@/components/canvas/Env/Env'
 // import Shader from '@/components/canvas/Shader/Shader'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
@@ -21,7 +23,7 @@ const DOM = () => {
     // Step 5 - delete Instructions components
     <>
       <Instructions />
-      <div className='absolute top-0 left-0 '>123</div>
+      <div className='absolute top-0 left-0 '>123 123 123 123 123</div>
     </>
   )
 }
@@ -30,7 +32,11 @@ const DOM = () => {
 const R3F = () => {
   return (
     <>
-      <ShaderCompos />
+      <Suspense fallback={null}>
+        <GlassWindow />
+        <Env></Env>
+      </Suspense>
+      {/* <ShaderCompos /> */}
     </>
   )
 }
@@ -38,7 +44,6 @@ const R3F = () => {
 const Page = () => {
   return (
     <>
-      <Suspense fallback={null}>{/*  */}</Suspense>
       <DOM />
       {/* @ts-ignore */}
       <R3F r3f />
@@ -51,7 +56,7 @@ export default Page
 export async function getStaticProps() {
   return {
     props: {
-      title: 'Index',
+      title: 'YO',
     },
   }
 }
