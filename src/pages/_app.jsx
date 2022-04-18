@@ -2,10 +2,10 @@ import { useRouter } from 'next/router'
 import useStore from '@/helpers/store'
 import { useEffect } from 'react'
 import Header from '@/config'
-import Dom from '@/components/layout/dom'
 import partition from '@/helpers/partition'
 import '@/styles/index.css'
 import dynamic from 'next/dynamic'
+// import Dom from '@/components/layout/dom'
 
 const LCanvas = dynamic(() => import('@/components/layout/canvas'), {
   ssr: false,
@@ -16,8 +16,9 @@ const Balance = ({ child }) => {
 
   return (
     <>
-      <Dom>{dom}</Dom>
+      {/* <Dom>{dom}</Dom> */}
       <LCanvas>{r3f}</LCanvas>
+      {dom}
     </>
   )
 }
