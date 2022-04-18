@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 // Step 5 - delete Instructions components
 import Instructions from '@/components/dom/Instructions'
+import { Suspense } from 'react'
 // import Shader from '@/components/canvas/Shader/Shader'
 
 // Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
@@ -33,10 +34,11 @@ const R3F = () => {
     </>
   )
 }
-0
+
 const Page = () => {
   return (
     <>
+      <Suspense fallback={null}>{/*  */}</Suspense>
       <DOM />
       {/* @ts-ignore */}
       <R3F r3f />

@@ -1,6 +1,7 @@
 import useStore from '@/helpers/store'
 import { useFrame } from '@react-three/fiber'
 import { useRef, useState } from 'react'
+import { ShaderPlane } from './Fun/ShaderPlane'
 
 const BoxComponent = ({ route }) => {
   const router = useStore((s) => s.router)
@@ -29,6 +30,8 @@ const BoxComponent = ({ route }) => {
       </mesh>
       <directionalLight position={[5, 5, 5]} />
       <ambientLight />
+
+      <ShaderPlane></ShaderPlane>
     </>
   )
 }
