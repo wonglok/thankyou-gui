@@ -33,7 +33,9 @@ const R3F = () => {
   return (
     <>
       <Suspense fallback={null}>
-        <GlassWindow />
+        <group position={[0, -4, 0]}>
+          <GlassWindow />
+        </group>
         <Env></Env>
       </Suspense>
       {/* <ShaderCompos /> */}
