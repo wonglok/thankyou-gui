@@ -2,6 +2,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Preload } from '@react-three/drei'
 import useStore from '@/helpers/store'
 import { useEffect, useRef } from 'react'
+import { GlowRender } from '../canvas/render/GlowRender'
 
 // const LControl = () => {
 //   const dom = useStore((state) => state.dom)
@@ -32,6 +33,7 @@ const LCanvas = ({ children }) => {
         <OrbitControls></OrbitControls>
         {/* <LControl /> */}
         <Preload all />
+        <GlowRender></GlowRender>
         {children}
       </Canvas>
     </div>
