@@ -30,7 +30,7 @@ function App({ Component, pageProps = { title: 'index' } }) {
   }, [router])
 
   const child = Component(pageProps).props.children
-  
+
   return (
     <>
       <Header title={pageProps.title} />

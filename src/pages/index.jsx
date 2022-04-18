@@ -7,15 +7,21 @@ import Instructions from '@/components/dom/Instructions'
 // WARNING ! errors might get obfuscated by using dynamic import.
 // If something goes wrong go back to a static import to show the error.
 // https://github.com/pmndrs/react-three-next/issues/49
-const Shader = dynamic(() => import('@/components/canvas/Shader/Shader'), {
-  ssr: false,
-})
+const ShaderCompos = dynamic(
+  () => import('@/components/canvas/Shader/Shader'),
+  {
+    ssr: false,
+  }
+)
 
 // dom components goes here
 const DOM = () => {
   return (
     // Step 5 - delete Instructions components
-    <Instructions />
+    <>
+      <Instructions />
+      <div className='absolute top-0 left-0 '>123</div>
+    </>
   )
 }
 
@@ -23,11 +29,11 @@ const DOM = () => {
 const R3F = () => {
   return (
     <>
-      <Shader />
+      <ShaderCompos />
     </>
   )
 }
-
+0
 const Page = () => {
   return (
     <>

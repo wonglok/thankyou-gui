@@ -6,10 +6,8 @@ const Box = dynamic(() => import('@/components/canvas/Box'), {
 })
 
 const DOM = () => {
-  return (
-    // Step 5 - delete Instructions components
-    <Instructions />
-  )
+  // Step 5 - delete Instructions components
+  return <>{/* <Instructions /> */}</>
 }
 
 const R3F = () => {
