@@ -6,9 +6,9 @@ import { RGBELoader } from 'three-stdlib'
 
 export function Env() {
   let tex = useLoader(RGBELoader, `/hdr/greenwich_park_02_1k.hdr`)
-  let { scene } = useThree((s) => {
+  let { scene } = useThree((st) => {
     return {
-      scene: s.scene,
+      scene: st.scene,
     }
   })
   useEffect(() => {
@@ -19,9 +19,6 @@ export function Env() {
   }, [tex, scene])
   return (
     <>
-      {/*  */}
-
-      {/*  */}
       {/*  */}
       {/*  */}
       {/*  */}
