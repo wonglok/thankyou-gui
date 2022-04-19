@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
+import { CustomBubbleMaterial } from '@/components/materaials/CustomBubbleMaterial/CustomBubbleMaterial'
 
 useGLTF.preload(`/scene/2022-04-18-glasswindow/glassrow.glb`)
 
@@ -15,6 +16,9 @@ export function GlassWindow(props) {
       actions[n]?.play()
     })
   }, [])
+
+  //
+  //
   return (
     <group ref={group} {...props} dispose={null}>
       <group name='Scene'>
@@ -35,7 +39,12 @@ export function GlassWindow(props) {
               position={[0, 0.17, 0]}
               rotation={[Math.PI, 1.38, 0]}
               userData={{ enableBloom: true }}
-            />
+            >
+              <customBubbleMaterial
+                {...nodes.ring.material}
+                key={CustomBubbleMaterial.key}
+              />
+            </mesh>
             <mesh
               name='ring001'
               geometry={nodes.ring001.geometry}
@@ -44,6 +53,16 @@ export function GlassWindow(props) {
               rotation={[-Math.PI, -0.86, 0]}
               scale={[1.91, 1.91, 1.91]}
               userData={{ enableBloom: true }}
+            >
+              <customBubbleMaterial
+                {...nodes.ring.material}
+                key={CustomBubbleMaterial.key}
+              />
+            </mesh>
+
+            <customBubbleMaterial
+              {...nodes.ring.material}
+              key={CustomBubbleMaterial.key}
             />
           </mesh>
         </group>

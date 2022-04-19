@@ -1,6 +1,6 @@
 function partition(array, isValid) {
   if (!Array.isArray(array)) {
-    return isValid(array) ? [[array], []] : [[], [array]];
+    return isValid(array) ? [[array], []] : [[], [array]]
   }
   return array.reduce(
     ([pass, fail], elem) => {
