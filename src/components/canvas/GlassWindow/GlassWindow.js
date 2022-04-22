@@ -17,6 +17,12 @@ export function GlassWindow(props) {
     })
   }, [])
 
+  let stuff = (
+    <customBubbleMaterial
+      {...nodes.ring.material}
+      key={CustomBubbleMaterial.key}
+    />
+  )
   //
   //
   return (
@@ -27,7 +33,7 @@ export function GlassWindow(props) {
             name='inner_ring'
             geometry={nodes.inner_ring.geometry}
             material={nodes.inner_ring.material}
-            position={[0, 4.44, -0.11]}
+            position={[0, 0, 0]}
             rotation={[-Math.PI / 2, 0, -Math.PI]}
             scale={[1.23, 1.23, 1.23]}
             userData={{ enableBloom: true }}
@@ -40,10 +46,7 @@ export function GlassWindow(props) {
               rotation={[Math.PI, 1.38, 0]}
               userData={{ enableBloom: true }}
             >
-              <customBubbleMaterial
-                {...nodes.ring.material}
-                key={CustomBubbleMaterial.key}
-              />
+              {stuff}
             </mesh>
             <mesh
               name='ring001'
@@ -54,16 +57,10 @@ export function GlassWindow(props) {
               scale={[1.91, 1.91, 1.91]}
               userData={{ enableBloom: true }}
             >
-              <customBubbleMaterial
-                {...nodes.ring.material}
-                key={CustomBubbleMaterial.key}
-              />
+              {stuff}
             </mesh>
 
-            <customBubbleMaterial
-              {...nodes.ring.material}
-              key={CustomBubbleMaterial.key}
-            />
+            {stuff}
           </mesh>
         </group>
       </group>

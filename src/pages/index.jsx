@@ -36,7 +36,7 @@ const R3F = () => {
     <>
       <Suspense fallback={null}>
         <Env></Env>
-        <group position={[0, -4, 0]}>
+        <group position={[0, 0, 0]}>
           <GlassWindow />
         </group>
         <UIContent>
