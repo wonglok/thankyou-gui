@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 
 // stage
-// HTTP https://vvthre7x0a.execute-api.ap-southeast-1.amazonaws.com/
-// WS wss://1adayxws9i.execute-api.ap-southeast-1.amazonaws.com/staging
+// HTTP https://6b38bc38za.execute-api.ap-southeast-1.amazonaws.com
+// WS wss://v754u5hand.execute-api.ap-southeast-1.amazonaws.com/staging
 
 // prod
-// HTTP: https://yd0nikxc79.execute-api.ap-southeast-1.amazonaws.com
-// WS: wss://dmn8e0xs4k.execute-api.ap-southeast-1.amazonaws.com/production
+// HTTP: https://52jnt5l5ll.execute-api.ap-southeast-1.amazonaws.com
+// WS: wss://77btibkhih.execute-api.ap-southeast-1.amazonaws.com/production
 
 export default function Page() {
   return <div>{<WebsocketPage></WebsocketPage>}</div>
@@ -15,7 +15,7 @@ export default function Page() {
 export function WebsocketPage() {
   useEffect(() => {
     let getURL = ({ ownerID, roomID, channelID }) => {
-      let useLocalHost = true
+      let useLocalHostForDevelopment = true
       let urlSearch = new URLSearchParams()
       urlSearch.set('ownerID', ownerID)
       urlSearch.set('roomID', roomID)
@@ -23,17 +23,18 @@ export function WebsocketPage() {
 
       let params = `?${urlSearch.toString()}`
 
-      //
+      // return `wss://77btibkhih.execute-api.ap-southeast-1.amazonaws.com/production${params}`
+
       if (process.env.NODE_ENV === 'development') {
-        if (useLocalHost) {
+        if (useLocalHostForDevelopment) {
           return `ws://localhost:3333${params}`
         } else {
-          return `staging${params}`
+          return `wss://v754u5hand.execute-api.ap-southeast-1.amazonaws.com/staging${params}`
         }
       } else if (process.env.NODE_ENV === 'preview') {
-        return `staging${params}`
+        return `wss://v754u5hand.execute-api.ap-southeast-1.amazonaws.com/staging${params}`
       } else if (process.env.NODE_ENV === 'production') {
-        return `production${params}`
+        return `wss://77btibkhih.execute-api.ap-southeast-1.amazonaws.com/production${params}`
       }
     }
 
@@ -45,47 +46,37 @@ export function WebsocketPage() {
 
     let clean = () => {}
 
-    fetch(`http://localhost:3333`, {
-      mode: 'cors',
+    let url = getURL({ ownerID, channelID, roomID })
+
+    let signal = new SignalClient({ url, debug: false })
+
+    signal.on('walk', (v) => {
+      console.log('walk', v)
     })
-      .then((e) => (e.ok ? e.json() : Promise.reject(e.statusText)))
-      .then((json) => {
-        console.log(json)
+    signal.on('online', (v) => {
+      console.log('online', v)
+    })
+    clean = () => {
+      signal.dispose()
+    }
 
-        let url = getURL({ ownerID, channelID, roomID })
+    window.onclick = () => {
+      signal.send({
+        // connection attribute
+        ownerID: ownerID,
+        roomID: roomID,
+        channelID: 'walk',
 
-        let signal = new SignalClient({ url, debug: false })
-
-        signal.on('walk', (v) => {
-          console.log('walk', v)
-        })
-        signal.on('online', (v) => {
-          console.log('online', v)
-        })
-        clean = () => {
-          signal.dispose()
-        }
-
-        window.onclick = () => {
-          signal.send({
-            ownerID: ownerID,
-            roomID: roomID,
-            channelID: 'walk',
-
-            //
-            type: 'walk',
-            posX: 0 + Math.random(),
-            posY: 0,
-            posZ: 0,
-            avatarMode: 'fight',
-            avatarActionName: 'stand',
-            avatarURL: '',
-          })
-        }
+        //
+        type: 'walk',
+        posX: 0 + Math.random(),
+        posY: 0,
+        posZ: 0,
+        avatarMode: 'fight',
+        avatarActionName: 'stand',
+        avatarURL: '',
       })
-      .catch((e) => {
-        console.log(e)
-      })
+    }
 
     return () => {
       clean()
