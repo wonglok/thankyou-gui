@@ -1,59 +1,36 @@
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 // Step 5 - delete Instructions components
-import Instructions from '@/components/dom/Instructions'
+// import Instructions from '@/components/dom/Instructions'
 import { Suspense } from 'react'
 import { GlassWindow } from '@/components/canvas/GlassWindow/GlassWindow'
 import { Env } from '@/components/canvas/Env/Env'
 import { UIContent } from '@/components/canvas/UIContent/UIContent'
 
-// import Shader from '@/components/canvas/Shader/Shader'
-// Dynamic import is used to prevent a payload when the website start that will include threejs r3f etc..
-// WARNING ! errors might get obfuscated by using dynamic import.
-// If something goes wrong go back to a static import to show the error.
-// https://github.com/pmndrs/react-three-next/issues/49
-
-// const ShaderCompos = dynamic(
-//   () => import('@/components/canvas/Shader/Shader'),
-//   {
-//     ssr: false,
-//   }
-// )
-
-// // dom components goes here
-// const DOM = () => {
-//   return (
-//     // Step 5 - delete Instructions components
-//     <>
-//       {/* <Instructions /> */}
-//       <div className='absolute top-0 left-0 '>123 123 123 123 123</div>
-//     </>
-//   )
-// }
-
-// canvas components goes here
-const R3F = () => {
-  return (
-    <>
-      <Suspense fallback={null}>
-        <Env></Env>
-        <group position={[0, -4, 0]}>
-          <GlassWindow />
-        </group>
-        <UIContent>
-          <div className='absolute top-0 left-0 px-12 py-2 bg-white'>123</div>
-        </UIContent>
-      </Suspense>
-      {/* <ShaderCompos /> */}
-    </>
-  )
-}
-
 const Page = () => {
   return (
     <>
-      {/* <DOM /> */}
-      {/* @ts-ignore */}
-      <R3F r3f />
+      <Suspense
+        fallback={
+          <group>
+            {/*  */}
+            {/*  */}
+            <UIContent>
+              <div className='absolute top-0 left-0 px-12 py-2 bg-white'>
+                Loading....
+              </div>
+            </UIContent>
+          </group>
+        }
+      >
+        <Env></Env>
+        <group position={[0, 0, 0]}>
+          <GlassWindow />
+        </group>
+        {/*  */}
+        <UIContent>
+          <div className='absolute top-0 left-0 px-12 py-2 bg-white'>aaaaa</div>
+        </UIContent>
+      </Suspense>
     </>
   )
 }
@@ -63,7 +40,7 @@ export default Page
 export async function getStaticProps() {
   return {
     props: {
-      title: 'YO',
+      title: 'Haha | Issac | the one who laughs',
     },
   }
 }

@@ -45,6 +45,7 @@ class TJCore {
       global.dispatchEvent = () => {}
       global.performance = { now: () => {} }
       global.requestAnimationFrame = () => {}
+      global.CustomEvent = class CustomEventClass {}
     }
 
     this.react = new Proxy(this, {
@@ -85,7 +86,7 @@ class TJCore {
     let NS = `_${Math.random()}`
     this.set = (k, v) => {
       this.resource.set(k, v)
-      global.dispatchEvent(new CustomEvent(k + NS, { detail: v }))
+      global.dispatchEvent(new global.CustomEvent(k + NS, { detail: v }))
     }
 
     let defaultChange = { initFire: false }

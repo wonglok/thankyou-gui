@@ -11,14 +11,12 @@ const LCanvas = dynamic(() => import('@/components/layout/canvas'), {
   ssr: false,
 })
 
-const Balance = ({ child }) => {
+const CanvasInsert = ({ child }) => {
   // const [r3f, dom] = partition(child, (c) => c.props.r3f === true)
 
   return (
     <>
-      {/* <Dom>{dom}</Dom> */}
       <LCanvas>{child}</LCanvas>
-      {/* {dom} */}
     </>
   )
 }
@@ -35,7 +33,7 @@ function App({ Component, pageProps = { title: 'index' } }) {
   return (
     <>
       <Header title={pageProps.title} />
-      <Balance child={child} />
+      <CanvasInsert child={child} />
     </>
   )
 }

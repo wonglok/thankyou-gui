@@ -7,7 +7,7 @@ import vfx from '@/helpers/vfx'
 import { MeshPhysicalMaterial } from 'three'
 
 // This shader is from Bruno Simons Threejs-Journey: https://threejs-journey.xyz
-class CustomBubbleMaterial extends MeshPhysicalMaterial {
+class GlassRingMaterial extends MeshPhysicalMaterial {
   constructor() {
     super({
       //
@@ -52,10 +52,10 @@ varying vec4 vWP;
 
       let atEnd = `
 gl_FragColor *= vec4(
-1.0 - 1.0 * pattern(1.5 * length(sin(time) * vWP.xy) * vWP.xy + 0.3 * cos(time)),
-1.0 - 1.0 * pattern(1.5 * length(sin(time) * vWP.xy) * vWP.xy + 0.0 * cos(time)),
-1.0 - 1.0 * pattern(1.5 * length(sin(time) * vWP.xy) * vWP.xy - 0.3 * cos(time))
-, 1.0);
+ 0.1 + pattern(1.0 / length(sin(time) / vWP.xy) / vWP.xy + 0.1 * cos(time * 0.1)),
+ 0.1 + pattern(1.0 / length(sin(time) / vWP.xy) / vWP.xy + 0.0 * cos(time * 0.1)),
+ 0.1 + pattern(1.0 / length(sin(time) / vWP.xy) / vWP.xy - 0.1 * cos(time * 0.1)),
+1.0);
 
 `
 
@@ -108,8 +108,8 @@ function getFbmPattern() {
 
 // This is the 🔑 that HMR will renew if this file is edited
 // It works for THREE.MeshPhysicalMaterial as well as for drei/MeshPhysicalMaterial
-CustomBubbleMaterial.key = guid.generate()
-// Make the material available in JSX as <CustomBubbleMaterial />
-extend({ CustomBubbleMaterial })
+GlassRingMaterial.key = guid.generate()
+// Make the material available in JSX as <GlassRingMaterial />
+extend({ GlassRingMaterial })
 
-export { CustomBubbleMaterial }
+export { GlassRingMaterial }
