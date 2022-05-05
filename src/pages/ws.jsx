@@ -15,6 +15,7 @@ export default function Page() {
 export function WebsocketPage() {
   useEffect(() => {
     let getURL = ({ ownerID, roomID, channelID }) => {
+      let useLocalHost = true
       let urlSearch = new URLSearchParams()
       urlSearch.set('ownerID', ownerID)
       urlSearch.set('roomID', roomID)
@@ -24,12 +25,15 @@ export function WebsocketPage() {
 
       //
       if (process.env.NODE_ENV === 'development') {
-        return `ws://localhost:3333${params}`
-        // return `wss://1adayxws9i.execute-api.ap-southeast-1.amazonaws.com/staging${params}`;
+        if (useLocalHost) {
+          return `ws://localhost:3333${params}`
+        } else {
+          return `staging${params}`
+        }
       } else if (process.env.NODE_ENV === 'preview') {
-        // return `wss://1adayxws9i.execute-api.ap-southeast-1.amazonaws.com/staging${params}`
+        return `staging${params}`
       } else if (process.env.NODE_ENV === 'production') {
-        // return `wss://dmn8e0xs4k.execute-api.ap-southeast-1.amazonaws.com/production${params}`
+        return `production${params}`
       }
     }
 
@@ -44,7 +48,7 @@ export function WebsocketPage() {
     fetch(`http://localhost:3333`, {
       mode: 'cors',
     })
-      .then((e) => e.ok && e.json())
+      .then((e) => (e.ok ? e.json() : Promise.reject(e.statusText)))
       .then((json) => {
         console.log(json)
 
@@ -78,6 +82,9 @@ export function WebsocketPage() {
             avatarURL: '',
           })
         }
+      })
+      .catch((e) => {
+        console.log(e)
       })
 
     return () => {
