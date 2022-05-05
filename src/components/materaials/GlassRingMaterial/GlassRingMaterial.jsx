@@ -51,11 +51,11 @@ varying vec4 vWP;
 `
 
       let atEnd = `
-gl_FragColor *= vec4(
- 0.1 + pattern(1.0 / length(sin(time) / vWP.xy) / vWP.xy + 0.1 * cos(time * 0.1)),
- 0.1 + pattern(1.0 / length(sin(time) / vWP.xy) / vWP.xy + 0.0 * cos(time * 0.1)),
- 0.1 + pattern(1.0 / length(sin(time) / vWP.xy) / vWP.xy - 0.1 * cos(time * 0.1)),
-1.0);
+// gl_FragColor *= vec4(
+//  1.3 * pattern(1.0 / length(sin(time) / vWP.xy) / vWP.xy + 0.1 * cos(time * 0.1)),
+//  1.3 * pattern(1.0 / length(sin(time) / vWP.xy) / vWP.xy + 0.0 * cos(time * 0.1)),
+//  1.3 * pattern(1.0 / length(sin(time) / vWP.xy) / vWP.xy - 0.1 * cos(time * 0.1)),
+// 1.0);
 
 `
 

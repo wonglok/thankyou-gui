@@ -5,6 +5,8 @@ import Header from '@/config'
 // import partition from '@/helpers/partition'
 import '@/styles/index.css'
 import dynamic from 'next/dynamic'
+import '../helpers/bvh'
+//
 // import Dom from '@/components/layout/dom'
 
 const LCanvas = dynamic(() => import('@/components/layout/canvas'), {
