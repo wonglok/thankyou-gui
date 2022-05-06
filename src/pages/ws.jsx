@@ -50,9 +50,12 @@ export function WebsocketPage() {
 
     let signal = new SignalClient({ url, debug: false })
 
+    //
     signal.on('walk', (v) => {
       console.log('walk', v)
     })
+
+    //
     signal.on('online', (v) => {
       console.log('online', v)
     })
