@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 
 // stage
-// HTTP https://6b38bc38za.execute-api.ap-southeast-1.amazonaws.com
-// WS wss://v754u5hand.execute-api.ap-southeast-1.amazonaws.com/staging
+// HTTP https://pb0xooiitl.execute-api.ap-southeast-1.amazonaws.com
+// WS wss://v7hdr4vozd.execute-api.ap-southeast-1.amazonaws.com/staging
 
 // prod
-// HTTP: https://52jnt5l5ll.execute-api.ap-southeast-1.amazonaws.com
-// WS: wss://77btibkhih.execute-api.ap-southeast-1.amazonaws.com/production
-
+// http
+// https://nw14ybygnl.execute-api.ap-southeast-1.amazonaws.com
+// ws
+// wss://v843hmenm8.execute-api.ap-southeast-1.amazonaws.com/production
 export default function Page() {
   return <div>{<WebsocketPage></WebsocketPage>}</div>
 }
@@ -34,9 +35,11 @@ export function WebsocketPage() {
       } else if (process.env.NODE_ENV === 'preview') {
         return `wss://v754u5hand.execute-api.ap-southeast-1.amazonaws.com/staging${params}`
       } else if (process.env.NODE_ENV === 'production') {
-        return `wss://77btibkhih.execute-api.ap-southeast-1.amazonaws.com/production${params}`
+        return `wss://v843hmenm8.execute-api.ap-southeast-1.amazonaws.com/production${params}`
       }
     }
+
+    fetch(`http://localhost:3333`, { mode: 'cors' }).catch(console.error)
 
     //
     let clientID = Math.random().toString(36).slice(2, 15)
