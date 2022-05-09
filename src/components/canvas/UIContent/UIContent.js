@@ -2,32 +2,26 @@ import { useThree } from '@react-three/fiber'
 // import { Html } from "@react-three/fiber";
 import { useEffect, useMemo, useRef } from 'react'
 import { createRoot } from 'react-dom/client'
+import { uuid } from 'short-uuid'
 // createPortal,
 
 export function UIContent({ children }) {
-  let { get } = useThree()
-  let dom = useRef(document.createElement('div'))
-  let proxy = useRef(get().gl.domElement.parentElement.parentElement)
-
-  let root = useMemo(() => {
-    let nowGone = dom.current
-
-    let root = createRoot(nowGone)
-    return root
-  }, [])
+  let gl = useThree((s3) => s3.gl)
 
   useEffect(() => {
-    proxy.current.appendChild(dom.current)
-    let now = proxy.current
-    let nowGone = dom.current
-
-    root.render(children)
+    let rootEl = document.createElement('span')
+    rootEl.id = '_id_' + uuid()
+    let root = createRoot(rootEl)
+    root.render(<>{children}</>)
+    gl.domElement.parentElement.parentElement.appendChild(rootEl)
 
     return () => {
+      rootEl.remove()
       root.render(<></>)
-      now.removeChild(nowGone)
     }
-  }, [root, children])
+  }, [children, gl])
 
   return null
 }
+
+UIContent.key = uuid()

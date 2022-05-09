@@ -1,7 +1,8 @@
+import { Preload } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Preload } from '@react-three/drei'
-import useStore from '@/helpers/store'
-import { useEffect, useRef } from 'react'
+// import { OrbitControls, Preload } from '@react-three/drei'
+// import useStore from '@/helpers/store'
+// import { useEffect, useRef } from 'react'
 import { GlowRender } from '../canvas/render/GlowRender'
 
 // const LControl = () => {
@@ -30,8 +31,7 @@ const LCanvas = ({ children }) => {
         // }}
         // onCreated={(state) => state.events.connect(dom.current)}
       >
-        <OrbitControls></OrbitControls>
-        {/* <LControl /> */}
+        {/* <OrbitControls></OrbitControls> */}
         <Preload all />
         <GlowRender></GlowRender>
         {children}

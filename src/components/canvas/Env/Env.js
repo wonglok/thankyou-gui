@@ -4,8 +4,8 @@ import { EquirectangularReflectionMapping } from 'three'
 import { sRGBEncoding } from 'three'
 import { RGBELoader } from 'three-stdlib'
 
-export function Env() {
-  let tex = useLoader(RGBELoader, `/hdr/greenwich_park_02_1k.hdr`)
+export function Env({ url }) {
+  let tex = useLoader(RGBELoader, url)
   let { scene } = useThree((st) => {
     return {
       scene: st.scene,

@@ -68,6 +68,19 @@ export function WebsocketPage() {
 
     window.onclick = () => {
       signal.send({
+        // avatarID *String
+        // connectionID String
+        // isOnline Boolean
+        // userID String
+        // roomID String
+        // lastMap String
+        // posX Number
+        // posY Number
+        // posZ Number
+        // avatarMode String # peace vs fight
+        // avatarActionName String
+        // avatarURL String
+
         // connection attribute
         ownerID: ownerID,
         roomID: roomID,

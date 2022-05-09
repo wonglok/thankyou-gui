@@ -4,14 +4,15 @@ import { useEffect } from 'react'
 import Header from '@/config'
 // import partition from '@/helpers/partition'
 import '@/styles/index.css'
-import dynamic from 'next/dynamic'
+// import dynamic from 'next/dynamic'
 import '../helpers/bvh'
+import LCanvas from '@/components/layout/canvas'
 //
 // import Dom from '@/components/layout/dom'
 
-const LCanvas = dynamic(() => import('@/components/layout/canvas'), {
-  ssr: false,
-})
+// const LCanvas = dynamic(() => import('@/components/layout/canvas'), {
+//   ssr: false,
+// })
 
 const CanvasInsert = ({ child }) => {
   // const [r3f, dom] = partition(child, (c) => c.props.r3f === true)
@@ -30,12 +31,15 @@ function App({ Component, pageProps = { title: 'index' } }) {
     useStore.setState({ router })
   }, [router])
 
-  const child = Component(pageProps).props.children
+  // const child = Component(pageProps).props.children
 
   return (
     <>
       <Header title={pageProps.title} />
-      <CanvasInsert child={child} />
+      <LCanvas>
+        <Component></Component>
+      </LCanvas>
+      {/* <CanvasInsert child={child} /> */}
     </>
   )
 }
